@@ -52,13 +52,13 @@ app.get(root + '/getNormExecution', (req, res) => {
     let output = '';
 
     if (normiChoice === "normEZ") {
-        output = shell.exec("./Scripts/runNorminette.sh " + userName + " " + projectName + " " + branchName + " " + "./../norminette/NormEZ/NormEZ.rb" + " " + "NormEZ.rb");
+        output = shell.exec("./Scripts/runNorminette.sh " + userName + " " + projectName + " " + branchName + " " + "./../../norminette/NormEZ/NormEZ.rb" + " " + "NormEZ.rb");
         for (let i = 0; i < output.length; i++) {
             if (output[i] === '\n')
                 nbNormError++;
         }
     } else if (normiChoice === "doom") {
-        output = shell.exec("./Scripts/runNorminette.sh " + userName + " " + projectName + " " + branchName + " " + "./../norminette/Doom/doom" + " " + "doom");
+        output = shell.exec("./Scripts/runNorminette.sh " + userName + " " + projectName + " " + branchName + " " + "./../../norminette/Doom/doom" + " " + "doom");
         const arrayOutput = output.split(" ");
         const latestElem = arrayOutput[arrayOutput.length - 4];
         nbNormError = Number(latestElem);
