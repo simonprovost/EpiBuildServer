@@ -13,8 +13,32 @@ function isCriterion(arr) {
     return 0;
 }
 
-app.get(root + '/getMakefileRulesExecution', (req, res) => {
-    console.log(req.ip + ' is connecting to getMakefileRulesExecution');
+app.get(root + '/getMakefileRuleExecution', (req, res) => {
+    console.log(req.ip + ' is connecting to getMakefileRuleExecution');
+
+    const userName = req.query.userName;
+    const projectName = req.query.projectName;
+    const binaryName = req.query.binaryName;
+    const branchName = req.query.branchName;
+    const ruleName = req.query.ruleName;
+
+    if (!userName || !projectName || !binaryName || !ruleName)
+        return res.json({
+            output: "Missing Argument",
+            code: 1,
+        });
+
+    const output = shell.exec("./Scripts/verif_repo_custom.sh "
+    + userName + " " + projectName + " " + binaryName + " " + branchName + " " + ruleName);
+
+    return res.json({
+        output: "##### Stdout: \n\n" + output.stdout + "##### Stderr: \n\n" + output.stderr,
+        code: output.code,
+    });
+});
+
+app.get(root + '/getEpitechMakefileRulesExecution', (req, res) => {
+    console.log(req.ip + ' is connecting to getEpitechMakefileRulesExecution');
 
     const userName = req.query.userName;
     const projectName = req.query.projectName;
