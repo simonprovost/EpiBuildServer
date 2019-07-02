@@ -7,3 +7,8 @@
 
 # EpiBuildServer
 Server of EpiBuild app which was done in NodeJS.
+
+
+Creators:
+https://github.com/Zuldruck
+https://github.com/simonprovost
